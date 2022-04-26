@@ -1,6 +1,7 @@
 package io.runebox.deobfuscator
 
 import io.runebox.asm.ClassPool
+import io.runebox.deobfuscator.transform.ControlFlowFixer
 import io.runebox.deobfuscator.transform.RuntimeExceptionRemover
 import org.tinylog.kotlin.Logger
 import java.io.File
@@ -20,9 +21,10 @@ class Deobfuscator(
         Logger.info("Loaded ${pool.classes().size} classes from input jar.")
 
         /*
-         * Register deobfuscator transformers
+         * Add deobfuscator transformers
          */
         addTransformer<RuntimeExceptionRemover>()
+        addTransformer<ControlFlowFixer>()
 
         Logger.info("Found ${transformers.size} deobfuscator bytecode transformers.")
     }
