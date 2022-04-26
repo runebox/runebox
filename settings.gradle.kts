@@ -4,4 +4,6 @@ plugins {
 
 rootProject.name = "runebox"
 
+include(":common")
+include(":util")
 include(":asm")
