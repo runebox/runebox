@@ -1,5 +1,5 @@
 dependencies {
-    api(project(":util"))
+    implementation(project(":common"))
     api("org.ow2.asm:asm:_")
     api("org.ow2.asm:asm-commons:_")
     api("org.ow2.asm:asm-util:_")

@@ -35,6 +35,8 @@ class ClassPool private constructor() {
     fun classes() = classMap.values.toList()
     fun ignoredClasses() = ignoredClassMap.values.toList()
 
+    fun getClass(name: String): ClassNode? = classMap[name]
+
     fun writeJar(jarFile: File, includeIgnoredClasses: Boolean = false) {
         if(jarFile.exists()) {
             jarFile.deleteRecursively()
