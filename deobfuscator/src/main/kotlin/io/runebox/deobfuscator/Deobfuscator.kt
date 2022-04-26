@@ -2,6 +2,7 @@ package io.runebox.deobfuscator
 
 import io.runebox.asm.ClassPool
 import io.runebox.deobfuscator.transform.ControlFlowFixer
+import io.runebox.deobfuscator.transform.OpaquePredicateRemover
 import io.runebox.deobfuscator.transform.RuntimeExceptionRemover
 import org.tinylog.kotlin.Logger
 import java.io.File
@@ -25,6 +26,7 @@ class Deobfuscator(
          */
         addTransformer<RuntimeExceptionRemover>()
         addTransformer<ControlFlowFixer>()
+        addTransformer<OpaquePredicateRemover>()
 
         Logger.info("Found ${transformers.size} deobfuscator bytecode transformers.")
     }

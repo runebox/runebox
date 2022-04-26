@@ -4,6 +4,7 @@ import org.objectweb.asm.Opcodes.*
 import org.objectweb.asm.Type
 import org.objectweb.asm.tree.AbstractInsnNode
 import org.objectweb.asm.tree.IntInsnNode
+import org.objectweb.asm.tree.JumpInsnNode
 import org.objectweb.asm.tree.LdcInsnNode
 
 fun AbstractInsnNode.isString() = this is LdcInsnNode && cst is String
@@ -83,3 +84,9 @@ fun AbstractInsnNode.numberValue(): Number = when {
     isFloat() -> floatValue()
     else -> throw IllegalArgumentException()
 }
+
+fun JumpInsnNode.isSingleIf() = (opcode in IFEQ..IFLE) || (opcode == IFNULL || opcode == IFNONNULL)
+fun JumpInsnNode.isDoubleIf() = (opcode in IF_ICMPEQ..IF_ICMPLE)
+
+fun AbstractInsnNode.isIf() = this is JumpInsnNode && opcode != GOTO
+fun AbstractInsnNode.isReturn() = opcode in IRETURN..RETURN
